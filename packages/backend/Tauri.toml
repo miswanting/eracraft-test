@@ -6,7 +6,7 @@ identifier = "com.era.eracraft"
 [build]
 beforeDevCommand = "cd ../frontend && pnpm dev"
 devUrl = "http://localhost:3000"
-beforeBuildCommand = "cd ../frontend && ls && pnpm generate"
+beforeBuildCommand = "cd ../frontend && pnpm generate"
 frontendDist = "../frontend/dist"
 
 [app]

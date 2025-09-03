@@ -8,7 +8,7 @@ on:
     #   - v*
 
 jobs:
-  release-tauri-app:
+  release:
     permissions:
       contents: write
     strategy:
@@ -61,12 +61,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
-          releaseName: App v__VERSION__
-          releaseBody: See the assets to download this version and install.
-          releaseDraft: true
-          prerelease: false
-          args: ${{ matrix.args }}
+          # tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
+          # releaseName: App v__VERSION__
+          # releaseBody: See the assets to download this version and install.
+          # releaseDraft: true
+          # prerelease: false
+          # args: ${{ matrix.args }}
           projectPath: ./packages/backend
-          distPath: ./packages/frontend/dist
-          iconPath: ./packages/backend/icons
+          # distPath: ./packages/frontend/dist
+          # iconPath: ./packages/backend/icons
+          # artifactPaths:
+          #   - ./packages/backend/target/app.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: ./packages/backend/target/release/eracraft.exe
