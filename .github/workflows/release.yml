@@ -55,6 +55,7 @@ jobs:
         run: |
           npm i -g pnpm
           pnpm i
+          pnpm icon
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -66,3 +67,6 @@ jobs:
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
+          projectPath: ./packages/backend
+          distPath: ./packages/frontend/dist
+          iconPath: ./packages/backend/icons
