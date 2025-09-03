@@ -28,30 +28,24 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: setup node
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
           # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
-      - name: install dependencies (ubuntu only)
+      - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest' # This must match the platform value defined above.
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
-      - name: check current dir
-        run: pwd
-
-      - name: list files
-        run: ls
-
-      - name: install frontend dependencies
+      - name: Install frontend dependencies
         run: |
           npm i -g pnpm
           pnpm i
@@ -73,7 +67,18 @@ jobs:
           # artifactPaths:
           #   - ./packages/backend/target/app.zip
 
-      - name: Upload artifact
+      - name: Assemble SDK
+        run: |
+          mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/eracraft.exe
+
+      - name: Upload program
         uses: actions/upload-artifact@v4
         with:
-          path: ./packages/backend/target/release/eracraft.exe
+          name: eracraft
+          path: ./packages/sdk/eracraft.exe
+
+      - name: Upload SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: eracraft-sdk
+          path: ./packages/sdk
