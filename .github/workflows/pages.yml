@@ -26,7 +26,7 @@ jobs:
           pnpm doc:build
 
       - name: Upload SDK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: github-pages
           path: ./packages/frontend/docs/.vitepress/dist
