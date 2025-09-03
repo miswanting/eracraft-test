@@ -7,7 +7,6 @@ on:
 
 jobs:
   release:
-    if: github.ref_name == 'main'
     permissions:
       contents: write
     strategy:
