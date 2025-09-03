@@ -1,0 +1,25 @@
+{
+  "name": "@eracraft/frontend",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.6.5",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "clean": "nuxt cleanup"
+  },
+  "devDependencies": {
+    "@nuxt/fonts": "0.11.4",
+    "hookable": "^5.5.3",
+    "nuxt": "^4.1.0",
+    "pug": "^3.0.3",
+    "sanitize.css": "^13.0.0",
+    "sass": "^1.92.0",
+    "vitepress": "^1.6.4"
+  }
+}
