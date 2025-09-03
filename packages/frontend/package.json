@@ -12,8 +12,8 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "doc:dev": "vitepress dev docs",
-    "doc:build": "vitepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
     "clean": "nuxt cleanup"
   },
   "devDependencies": {
