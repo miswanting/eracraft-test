@@ -51,33 +51,28 @@ jobs:
           pnpm i
           pnpm icon
 
-      - uses: tauri-apps/tauri-action@v0
+      - name: Build tauri app
+        uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # tagName: app-v__VERSION__ # the action automatically replaces \_\_VERSION\_\_ with the app version.
-          # releaseName: App v__VERSION__
-          # releaseBody: See the assets to download this version and install.
-          # releaseDraft: true
-          # prerelease: false
-          # args: ${{ matrix.args }}
           projectPath: ./packages/backend
-          # distPath: ./packages/frontend/dist
-          # iconPath: ./packages/backend/icons
-          # artifactPaths:
-          #   - ./packages/backend/target/app.zip
+          args: ${{ matrix.args }}
 
       - name: Assemble SDK
         run: |
+          ls ./packages/backend/target/release/
           mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/eracraft.exe
 
-      - name: Upload program
+      - name: Upload APP
+        if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: eracraft
           path: ./packages/sdk/eracraft.exe
 
       - name: Upload SDK
+        if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: eracraft-sdk
