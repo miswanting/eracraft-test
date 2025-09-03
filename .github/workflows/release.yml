@@ -8,7 +8,7 @@ on:
     #   - v*
 
 jobs:
-  publish-tauri:
+  release-tauri-app:
     permissions:
       contents: write
     strategy:
