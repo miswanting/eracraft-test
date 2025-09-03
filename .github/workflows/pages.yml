@@ -25,26 +25,32 @@ jobs:
           pnpm i
           pnpm doc:build
 
-      - name: Upload SDK
-        uses: actions/upload-artifact@v4
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: github-pages
-          path: ./packages/frontend/docs/.vitepress/dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/frontend/docs/.vitepress/dist
 
-  # Deploy job
-  deploy:
-    needs: build
+  #     - name: Upload SDK
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: github-pages
+  #         path: ./packages/frontend/docs/.vitepress/dist
 
-    permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
+  # # Deploy job
+  # deploy:
+  #   needs: build
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  #   permissions:
+  #     pages: write # to deploy to Pages
+  #     id-token: write # to verify the deployment originates from an appropriate source
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
