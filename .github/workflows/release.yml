@@ -81,7 +81,6 @@ jobs:
       #     path: ./packages/sdk/eracraft.exe
 
       - name: Upload SDK
-        uses: actions/upload-artifact@v4
+        uses: softprops/action-gh-release@v2
         with:
-          name: eracraft-sdk
-          path: ./packages/sdk
+          files: ./packages/sdk
