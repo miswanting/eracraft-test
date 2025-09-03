@@ -12,7 +12,8 @@
     "icon": "tauri icon app-icon.svg",
     "dev": "tauri dev",
     "build": "tauri build",
-    "clean": "cargo clean"
+    "clean": "cargo clean",
+    "tauri": "tauri"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.8.4"
