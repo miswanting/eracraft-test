@@ -59,17 +59,27 @@ jobs:
           projectPath: ./packages/backend
           args: ${{ matrix.args }}
 
+      - name: Assemble SDK (Windows)
+        if: matrix.platform == 'windows-latest'
+        run: |
+          mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/
+
+      - name: Assemble SDK (Ubuntu)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          mv ./packages/backend/target/release/eracraft ./packages/sdk/
+
       - name: Assemble SDK
+        if: matrix.platform == 'ubuntu-latest'
         run: |
           ls ./packages/backend/target/release/
-          mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/eracraft.exe
 
-      - name: Upload APP
-        if: matrix.platform == 'windows-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: eracraft
-          path: ./packages/sdk/eracraft.exe
+      # - name: Upload APP
+      #   if: matrix.platform == 'windows-latest'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: eracraft
+      #     path: ./packages/sdk/eracraft.exe
 
       - name: Upload SDK
         if: matrix.platform == 'windows-latest'
