@@ -1,6 +1,6 @@
 {
   "name": "eracraft",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "private": true,
   "packageManager": "pnpm@10.6.5",
   "description": "",
@@ -18,7 +18,7 @@
     "commit": "cz",
     "bump": "bumpp -r --no-commit --no-tag --no-push",
     "changelog": "pnpm conventional-changelog -p angular",
-    "bump:commit": "echo PLS Choose `as-is` && bumpp -a --no-push",
+    "bump:commit": "echo PLS Choose `as-is` && bumpp -a",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
