@@ -28,12 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup node
+      - name: Setup node (lts)
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
-      - name: Install Rust stable
+      - name: Setup rust (stable)
         uses: dtolnay/rust-toolchain@stable
         with:
           # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
@@ -59,6 +59,10 @@ jobs:
           projectPath: ./packages/backend
           args: ${{ matrix.args }}
 
+      - name: Scan SDK
+        run: |
+          ls ./packages/backend/target/release/
+
       - name: Assemble SDK (Windows)
         if: matrix.platform == 'windows-latest'
         run: |
@@ -69,11 +73,6 @@ jobs:
         run: |
           mv ./packages/backend/target/release/eracraft ./packages/sdk/
 
-      - name: Assemble SDK
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          ls ./packages/backend/target/release/
-
       # - name: Upload APP
       #   if: matrix.platform == 'windows-latest'
       #   uses: actions/upload-artifact@v4
@@ -82,7 +81,6 @@ jobs:
       #     path: ./packages/sdk/eracraft.exe
 
       - name: Upload SDK
-        if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
           name: eracraft-sdk

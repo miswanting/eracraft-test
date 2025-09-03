@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Build job
+  build:
+    # <Not provided for brevity>
+    # At a minimum this job should upload artifacts using actions/upload-pages-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup node (lts)
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install frontend dependencies
+        run: |
+          npm i -g pnpm
+          pnpm i
+          pnpm doc:build
+
+      - name: Upload SDK
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: ./packages/frontend/docs/.vitepress/dist
+
+  # Deploy job
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

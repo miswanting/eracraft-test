@@ -1,5 +1,6 @@
 {
   "name": "@eracraft/frontend",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.6.5",
@@ -11,6 +12,8 @@
   "scripts": {
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "doc:dev": "vitepress dev docs",
+    "doc:build": "vitepress build docs",
     "clean": "nuxt cleanup"
   },
   "devDependencies": {
