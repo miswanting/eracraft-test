@@ -1,3 +1,12 @@
+## [0.1.7](https://github.com/miswanting/eracraft-test/compare/v0.1.6...v0.1.7) (2025-09-03)
+
+
+### Features
+
+* ddd ([3245130](https://github.com/miswanting/eracraft-test/commit/32451300a2da8d4b5e19ce6fa3c3b469891c8ccc))
+
+
+
 ## [0.1.6](https://github.com/miswanting/eracraft-test/compare/v0.1.5...v0.1.6) (2025-09-03)
 
 
