@@ -1,3 +1,5 @@
+![eracraft logo](packages/backend/app-icon.svg)
+
 # eracraft
 
 eracraft 是一个受 emuera 和 eramaker 启发的框架，旨在让游戏开发与模组制作更简单。
@@ -39,4 +41,5 @@ eracraft 是一个受 emuera 和 eramaker 启发的框架，旨在让游戏开�
 - 使用`pnpm bump`更新版本号；
 - 使用`pnpm changelog`更新ChangeLog；
 - 使用`pnpm bump:commit`提交版本更新，记得选择`as-is`；
+- 使用`git push`推送分支；
 - 使用`pnpm push:tags`推送标签；
