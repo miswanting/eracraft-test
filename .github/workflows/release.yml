@@ -109,8 +109,9 @@ jobs:
 
       - name: Upload SDK (Ubuntu)
         uses: actions/upload-artifact@v4
-        run: |
-          mv ./packages/backend/target/release/eracraft ./packages/sdk/
+        with:
+          name: eracraft-sdk
+          path: packages/sdk/*
 
   # - name: Upload APP
   #   if: matrix.platform == 'windows-latest'
