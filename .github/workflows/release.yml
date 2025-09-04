@@ -59,8 +59,10 @@ jobs:
 
       - name: Scan SDK
         run: |
-          ls ./packages/
           ls ./packages/backend/target/release/
+
+      - name: Scan SDK
+        run: |
           ls ./packages/sdk/
 
       - name: Assemble SDK (Windows)
