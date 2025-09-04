@@ -19,6 +19,7 @@
     "bump": "bumpp -r --no-commit --no-tag --no-push",
     "changelog": "pnpm conventional-changelog -p angular",
     "bump:commit": "echo PLS Choose `as-is` && bumpp -a --no-push",
+    "push": "git push --tags",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },

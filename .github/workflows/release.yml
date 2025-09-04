@@ -1,4 +1,4 @@
-name: release
+name: Generate Release
 
 on:
   push:
@@ -59,7 +59,9 @@ jobs:
 
       - name: Scan SDK
         run: |
+          ls ./packages/
           ls ./packages/backend/target/release/
+          ls ./packages/sdk/
 
       - name: Assemble SDK (Windows)
         if: matrix.platform == 'windows-latest'
