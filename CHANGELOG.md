@@ -1,3 +1,12 @@
+## [0.1.14-beta.3](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.2...v0.1.14-beta.3) (2025-09-04)
+
+
+### Features
+
+* fds ([b27e4af](https://github.com/miswanting/eracraft-test/commit/b27e4af0536e1ede4f85b047d90542c6d5c70782))
+
+
+
 ## [0.1.14-beta.2](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.1...v0.1.14-beta.2) (2025-09-04)
 
 
