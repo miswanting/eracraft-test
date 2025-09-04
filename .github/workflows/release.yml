@@ -127,7 +127,7 @@ jobs:
   #     path: packages/sdk/*
 
   release:
-    needs: release
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
