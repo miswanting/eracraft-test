@@ -1,3 +1,12 @@
+## [0.1.11](https://github.com/miswanting/eracraft-test/compare/v0.1.10...v0.1.11) (2025-09-04)
+
+
+### Features
+
+* yes ([fcce522](https://github.com/miswanting/eracraft-test/commit/fcce522e91868b62e51684b296e9d38bf4431a7e))
+
+
+
 ## [0.1.10](https://github.com/miswanting/eracraft-test/compare/v0.1.8...v0.1.10) (2025-09-03)
 
 
