@@ -14,15 +14,15 @@ jobs:
       matrix:
         include:
           - platform: windows-latest
-            artifact: eracraft-sdk-windows-x64
+            arch: windows-x64
             ext: zip
             args: ''
           - platform: ubuntu-latest
-            artifact: eracraft-sdk-linux-x64
+            arch: linux-x64
             ext: tar.gz
             args: ''
           # - platform: macos-latest
-          #   artifact: eracraft-sdk-macos-x64
+          #   arch: macos-x64
           #   ext: tar.gz
           #   args: --target x86_64-apple-darwin
 
@@ -79,20 +79,20 @@ jobs:
       - name: Assemble SDK (Windows)
         if: matrix.platform == 'windows-latest'
         run: |
-          move .\packages\backend\target\release\eracraft.exe .\packages\sdk\
-          Compress-Archive -Path .\packages\sdk\* -DestinationPath eracraft-sdk-windows-x64-${{ github.ref_name }}.zip
+          mv .\packages\backend\target\release\eracraft.exe .\packages\sdk\
+          Compress-Archive -Path .\packages\sdk\* -DestinationPath eracraft-sdk-${{ github.ref_name }}-${{ matrix.arch }}.zip
 
       - name: Assemble SDK (Linux)
         if: matrix.platform == 'ubuntu-latest'
         run: |
           mv ./packages/backend/target/release/eracraft ./packages/sdk/
-          tar -czf eracraft-sdk-linux-x64-${{ github.ref_name }}.tar.gz -C packages/sdk .
+          tar -czf eracraft-sdk-${{ github.ref_name }}-${{ matrix.arch }}.tar.gz -C packages/sdk .
 
       - name: Upload SDK Archive
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: ${{ matrix.artifact }}-${{ github.ref_name }}.${{ matrix.ext }}
+          path: eracraft-sdk-${{ github.ref_name }}-${{ matrix.arch }}.${{ matrix.ext }}
 
   create-release:
     needs: build
