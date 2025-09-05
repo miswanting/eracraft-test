@@ -8,17 +8,7 @@ on:
       - v*
 
 jobs:
-  draft:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: softprops/action-gh-release@v2
-        with:
-          draft: true
-
   build:
-    needs: draft
     permissions:
       contents: write
     strategy:
@@ -136,8 +126,18 @@ jobs:
   #     name: eracraft-sdk
   #     path: packages/sdk/*
 
-  release:
+  prepare-release:
     needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+
+  create-release:
+    needs: prepare-release
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifacts
