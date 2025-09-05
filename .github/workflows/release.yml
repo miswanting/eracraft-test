@@ -29,10 +29,10 @@ jobs:
             args: ''
           - platform: ubuntu-latest
             args: ''
-          - platform: macos-latest # for Arm based macs (M1 and above).
-            args: --target aarch64-apple-darwin
-          - platform: macos-latest # for Intel based macs.
-            args: --target x86_64-apple-darwin
+          # - platform: macos-latest # for Arm based macs (M1 and above).
+          #   args: --target aarch64-apple-darwin
+          # - platform: macos-latest # for Intel based macs.
+          #   args: --target x86_64-apple-darwin
 
     runs-on: ${{ matrix.platform }}
     steps:
@@ -109,10 +109,18 @@ jobs:
         run: |
           mv ./packages/backend/target/release/eracraft ./packages/sdk/
 
-      - name: Upload SDK (Ubuntu)
+      - name: Upload SDK (Windows)
+        if: matrix.platform == 'windows-latest'
         uses: actions/upload-artifact@v4
         with:
-          name: eracraft-sdk-${{ matrix.os }}-${{ github.ref_name }}
+          name: eracraft-sdk-windows-x64 ${{ github.ref_name }}
+          path: packages/sdk/*
+
+      - name: Upload SDK (Linux)
+        if: matrix.platform == 'ubuntu-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: eracraft-sdk-linux-x64 ${{ github.ref_name }}
           path: packages/sdk/*
 
   # - name: Upload APP
