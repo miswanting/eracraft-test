@@ -14,12 +14,16 @@ jobs:
       matrix:
         include:
           - platform: windows-latest
+            artifact: eracraft-sdk-windows-x64
+            ext: zip
             args: ''
           - platform: ubuntu-latest
+            artifact: eracraft-sdk-linux-x64
+            ext: tar.gz
             args: ''
-          # - platform: macos-latest # for Arm based macs (M1 and above).
-          #   args: --target aarch64-apple-darwin
-          # - platform: macos-latest # for Intel based macs.
+          # - platform: macos-latest
+          #   artifact: eracraft-sdk-macos-x64
+          #   ext: tar.gz
           #   args: --target x86_64-apple-darwin
 
     runs-on: ${{ matrix.platform }}
@@ -37,7 +41,6 @@ jobs:
       - name: Setup rust (stable)
         uses: dtolnay/rust-toolchain@stable
         with:
-          # Those targets are only used on macos runners so it's in an `if` to slightly speed up windows and linux builds.
           targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: Install dependencies (ubuntu only)
@@ -51,12 +54,6 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install frontend dependencies
-        run: |
-          pnpm i
-          pnpm icon
-
-      - name: Install frontend dependencies
-        if: matrix.platform == 'ubuntu-latest'
         run: |
           pnpm i
           pnpm icon
@@ -79,39 +76,22 @@ jobs:
           projectPath: ./packages/backend
           args: ${{ matrix.args }}
 
-      - name: Assemble SDK (Windows)
-        if: matrix.platform == 'windows-latest'
+      - name: Assemble SDK
         run: |
-          mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/
+          mkdir -p packages/sdk
+          if [[ "${{ matrix.platform }}" == "windows-latest" ]]; then
+            mv ./packages/backend/target/release/eracraft.exe ./packages/sdk/
+            cd packages/sdk && zip -r ../../${{ matrix.artifact }}-${{ github.ref_name }}.zip . && cd ../..
+          else
+            mv ./packages/backend/target/release/eracraft ./packages/sdk/
+            cd packages/sdk && tar -czf ../../${{ matrix.artifact }}-${{ github.ref_name }}.tar.gz . && cd ../..
+          fi
 
-      - name: Assemble SDK (Ubuntu)
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          mv ./packages/backend/target/release/eracraft ./packages/sdk/
-
-      - name: Upload SDK (Windows)
-        if: matrix.platform == 'windows-latest'
+      - name: Upload SDK Archive
         uses: actions/upload-artifact@v4
         with:
-          name: eracraft-sdk-windows-x64 ${{ github.ref_name }}
-          path: packages/sdk/*
-
-      - name: Upload SDK (Linux)
-        if: matrix.platform == 'ubuntu-latest'
-        uses: actions/upload-artifact@v4
-        with:
-          name: eracraft-sdk-linux-x64 ${{ github.ref_name }}
-          path: packages/sdk/*
-
-  # prepare-release:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - uses: softprops/action-gh-release@v2
-  #       with:
-  #         draft: true
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.artifact }}-${{ github.ref_name }}.${{ matrix.ext }}
 
   create-release:
     needs: build
@@ -125,13 +105,12 @@ jobs:
           path: artifacts/
 
       - name: Debug
-        run: |
-          ls artifacts/
+        run: ls -R artifacts/
 
-      - name: Upload SDK
+      - name: Upload SDKs to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/**/*
+          files: artifacts/**/*.{zip,tar.gz}
 
   deploy-pages:
     needs: build
