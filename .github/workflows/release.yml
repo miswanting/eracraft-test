@@ -79,14 +79,12 @@ jobs:
       - name: Assemble SDK (Windows)
         if: matrix.platform == 'windows-latest'
         run: |
-          mkdir packages\sdk
           move .\packages\backend\target\release\eracraft.exe .\packages\sdk\
           Compress-Archive -Path .\packages\sdk\* -DestinationPath eracraft-sdk-windows-x64-${{ github.ref_name }}.zip
 
       - name: Assemble SDK (Linux)
         if: matrix.platform == 'ubuntu-latest'
         run: |
-          mkdir -p packages/sdk
           mv ./packages/backend/target/release/eracraft ./packages/sdk/
           tar -czf eracraft-sdk-linux-x64-${{ github.ref_name }}.tar.gz -C packages/sdk .
 
