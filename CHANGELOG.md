@@ -1,3 +1,12 @@
+## [0.1.14-beta.8](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.7...v0.1.14-beta.8) (2025-09-05)
+
+
+### Features
+
+* sdf ([97559a5](https://github.com/miswanting/eracraft-test/commit/97559a535aa118e6ed7be97de3a8a630792f6d96))
+
+
+
 ## [0.1.14-beta.7](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.6...v0.1.14-beta.7) (2025-09-05)
 
 
