@@ -1,3 +1,12 @@
+## [0.1.14-beta.12](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.11...v0.1.14-beta.12) (2025-09-05)
+
+
+### Features
+
+* 123 ([9a155b5](https://github.com/miswanting/eracraft-test/commit/9a155b57413f16eec21bd611a27c83ad00edcb0e))
+
+
+
 ## [0.1.14-beta.11](https://github.com/miswanting/eracraft-test/compare/v0.1.14-beta.10...v0.1.14-beta.11) (2025-09-05)
 
 
