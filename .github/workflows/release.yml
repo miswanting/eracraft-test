@@ -148,11 +148,13 @@ jobs:
       - name: Upload SDK
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/*
+          files: artifacts/**/*
 
   deploy-pages:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
