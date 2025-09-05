@@ -124,6 +124,10 @@ jobs:
         with:
           path: artifacts/
 
+      - name: Debug
+        run: |
+          ls artifacts/
+
       - name: Upload SDK
         uses: softprops/action-gh-release@v2
         with:
