@@ -91,8 +91,8 @@ jobs:
       - name: Upload SDK Archive
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact }}
-          path: eracraft-sdk-${{ github.ref_name }}-${{ matrix.arch }}.${{ matrix.ext }}
+          name: eracraft-sdk-${{ matrix.arch }}
+          path: eracraft-sdk-*
 
   create-release:
     needs: build
@@ -103,6 +103,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v5
         with:
+          pattern: eracraft-sdk-*
           path: artifacts/
 
       - name: Debug
